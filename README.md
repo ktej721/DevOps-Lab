@@ -1,63 +1,26 @@
-# **DevOps Lab Manual**
+# DevOps Lab — Kiran Tej (ktej721)
 
-Welcome to the **DevOps Lab Manual**, your starter guide to mastering DevOps concepts! This repository is  curated to serve as a **one-stop resource and reference** for undergraduate students embarking on their DevOps journey. From fundamental concepts to near real-world assignments, it’s all here to make your learning experience seamless and pragmatic.
+> Practical lab exercises covering Kubernetes, Docker, Jenkins and Grafana.
 
-## **About This Manual**
+## Exercises
 
-This DevOps Lab Manual was developed during the teaching of  **DevOps Course**  inspired by the curiosity and enthusiasm of students eager to delve into the nuances of DevOps. Their interest in understanding complex workflows and real-world applications has shaped this repository into a comprehensive guide tailored for undergraduate students.
+| # | Exercise | Topics | Date |
+|---|---|---|---|
+| 1 | [Kubernetes Getting Started](./Exercise-1-Kubernetes-Getting-Started/) | Pod, Service, Minikube, NodePort | Aug 22, 2026 |
+| 2 | [Minikube + Flask Deployment](./Exercise-2-Minikube-Kubectl-Flask/) | Deployment, Flask, Readiness Probe | Aug 28, 2026 |
+| 3 | [Scaling with ReplicaSets](./Exercise-3-Minikube-Scaling-Flask-App-with-Replicasets/) | ReplicaSet, HPA, Gunicorn | Sep 04, 2026 |
+| 4 | [Docker Networking](./Exercise-4-Docker-Networking/) | Bridge Network, MySQL, Redis | Sep 10, 2026 |
+| 5 | [Docker Security (AppArmor)](./Exercise-5-Docker-Security-AppArmor/) | AppArmor Profile, Docker SDK | Sep 16, 2026 |
+| 6 | [Grafana Monitoring](./Exercise-6-Grafana-Realtime-Monitoring-of-Quick-Commerce-App/) | Prometheus, Grafana, Alert Rules | Sep 22, 2026 |
+| 7 | [Jenkins CI Automation](./Exercise-7-Jenkins-CI-Automation/) | Jenkins LTS, Docker Compose | Sep 28, 2026 |
+| 8 | [Jenkins Hello World Job](./Exercise-8-Jenkins-Hello-World-Job/) | Freestyle Job, Shell Script | Oct 04, 2026 |
+| 9 | [Jenkins Multi-Stage Pipeline](./Exercise-9-Jenkins-Multi-Stage-Pipeline/) | Declarative Pipeline, unittest | Oct 10, 2026 |
+| 10 | [Multi-Node Minikube Deployment](./Exercise-10-Minikube-Multi-Node-Multi-App-Minikube-Deployment/) | Multi-Node, Product Catalog, Cart | Oct 17, 2026 |
 
-I would like to express my heartfelt gratitude to all the students, colleagues and contributors who have played a vital role in shaping this manual. Your insights, questions and dedication to learning have been invaluable in making this resource as practical and engaging as possible. 
-
----
-
-## **What's Inside?**
-
-- **📝 Notes**: Concise explanations of core DevOps concepts, tools and methodologies. (work in progress)
-- **💻 Exercises**: Hands-on labsand projects designed to reinforce your skills.
-- **📖 Assignments**: Challenging, real-world scenarios to simulate industry practices.
-- **🔗 References**: Handpicked articles, blogs and videos to deepen your understanding.
-### To Be Added
-- **⚙️ Tools and Tips**: Pro tips and guidance for using Docker, Kubernetes, Jenkins, Git and  more.
-- **🎯 Best Practices**: Key takeaways to adopt DevOps culture and practices effectively.
-- **🛡️ DevSecOps**: Integrating security into DevOps lifecycle, ensuring proactive threat detection, secure code practices and compliance automation.
----
-
-## **Who is this For?**
-
-This repository is designed for **undergraduate students** who are:
-- Looking to gain practical experience in **DevOps tools and workflows**.
-- Preparing to tackle **industry challenges** with confidence.
-
-Whether you're new to DevOps or seeking to refine your skills, this lab manual has something for everyone!
-
----
-
-## **Key Features**
-
-1. **Engaging Exercies**: From simple Docker exercises to advanced Kubernetes orchestration, build your portfolio as you learn.
-2. **Hands-On Learning**: Dive into step-by-step guides for containerization, CI/CD pipelines, infrastructure as code and  more.
-3. **Real-World Use Cases**: Solve scenarios inspired by industry practices, like deploying scalable applications with Kubernetes or setting up robust CI/CD workflows.
-4. **Streamlined Content**: All notes, references and  exercises are structured to align with UG-level coursework.
-
----
-
-## **Why DevOps?**
-
-DevOps is not just a buzzword—it’s a **must-have skill** in today’s automation driver tech-world. By adopting DevOps practices, you’ll:
-- Bridge the gap between development and operations teams.
-- Enhance your ability to deliver high-quality software faster.
-- Prepare for exciting career opportunities in the ever-evolving tech landscape.
-
----
-
-## **Get Started Today!**
-
-Start exploring and leveling up your DevOps skills with this repository. Let’s make learning **DevOps intuitive, fun and impactful**!
-
----
-
-## **Contact**
-
-- **Sunag P**
-  - LinkedIn: [https://www.linkedin.com/in/sunagp/](https://www.linkedin.com/in/sunagp/)
-  - Instagram: [https://www.instagram.com/sunag3007/](https://www.instagram.com/sunag3007/)
+## Structure
+Each exercise folder contains:
+- `README.md` — Objective, architecture, how to run
+- Source code (`app.py`, `Dockerfile`, YAML manifests, etc.)
+- `deploy.sh` / `deploy.ps1` — Deployment scripts
+- `output.txt` — Actual command output from execution
+- `screenshots/` — Terminal screenshots showing working output

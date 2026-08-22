@@ -1,0 +1,34 @@
+$ minikube start --driver=docker --cni=bridge
+* minikube v1.39.0 on Darwin 26.5.2 (arm64)
+* Using the docker driver based on user configuration
+* Starting "minikube" primary control-plane node
+* Configuring bridge CNI (Container Networking Interface) ...
+* Verifying Kubernetes components...
+* Done! kubectl is now configured to use "minikube" cluster
+
+$ kubectl apply -f pod.yaml
+pod/zepto-storefront created
+
+$ kubectl apply -f service.yaml
+service/zepto-storefront-svc created
+
+$ kubectl get pods -o wide
+NAME               READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+zepto-storefront   1/1     Running   0          45s   10.244.0.4   minikube   <none>           <none>
+
+$ kubectl get services
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP        5m
+zepto-storefront-svc   NodePort    10.96.162.140   <none>        80:30080/TCP   45s
+
+$ kubectl describe pod zepto-storefront | grep -E "Status:|Node:|IP:"
+Status:             Running
+Node:               minikube/192.168.49.2
+IP:                 10.244.0.4
+
+$ minikube service zepto-storefront-svc
+|-----------|----------------------|-------------|---------------------------|
+| NAMESPACE |         NAME         | TARGET PORT |            URL            |
+|-----------|----------------------|-------------|---------------------------|
+| default   | zepto-storefront-svc |          80 | http://192.168.49.2:30080 |
+|-----------|----------------------|-------------|---------------------------|
