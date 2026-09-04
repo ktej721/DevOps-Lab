@@ -1,0 +1,25 @@
+$ docker build -t flashsale:1.0 .
+[+] Building 14.8s (10/10) FINISHED
+
+$ kubectl apply -f replicaset-deployment.yaml
+deployment.apps/flashsale-deployment created
+service/flashsale-svc created
+
+$ kubectl get pods -o wide
+NAME                                    READY   STATUS    RESTARTS   AGE   IP           NODE
+flashsale-deployment-7c8687cb46-9f8zz   1/1     Running   0          30s   10.244.0.8   minikube
+flashsale-deployment-7c8687cb46-l74xl   1/1     Running   0          30s   10.244.0.6   minikube
+flashsale-deployment-7c8687cb46-tpn8d   1/1     Running   0          30s   10.244.0.7   minikube
+
+$ curl http://localhost:5099/
+{"event":"DevOps Flash Sale 2025!","pod":"flashsale-deployment-7c8687cb46-9f8zz","timestamp":"2026-10-25 14:01:26","total_orders":0}
+
+$ kubectl scale deployment flashsale-deployment --replicas=5
+deployment.apps/flashsale-deployment scaled
+
+$ kubectl get pods -o wide | grep flashsale
+flashsale-deployment-7c8687cb46-9f8zz   1/1     Running   0   2m32s   10.244.0.8    minikube
+flashsale-deployment-7c8687cb46-cnv95   1/1     Running   0   8s      10.244.0.9    minikube
+flashsale-deployment-7c8687cb46-jhd8b   1/1     Running   0   8s      10.244.0.10   minikube
+flashsale-deployment-7c8687cb46-l74xl   1/1     Running   0   2m32s   10.244.0.6    minikube
+flashsale-deployment-7c8687cb46-tpn8d   1/1     Running   0   2m32s   10.244.0.7    minikube
