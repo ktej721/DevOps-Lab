@@ -1,0 +1,31 @@
+$ docker network create --driver bridge --subnet 172.20.0.0/16 grade-network
+36a689362cbc3c2104016a4edbbf15803c1e6dbbb4e06b28a4562b3ee736b9a4
+
+$ docker network ls | grep grade
+36a689362cbc   grade-network   bridge    local
+
+$ docker build -t grade-tracker:1.0 .
+[+] Building 8.4s (9/9) FINISHED
+
+$ docker run -d --name grade-mysql --net=grade-network -e MYSQL_ROOT_PASSWORD=devops123 mysql:8.0
+275f6e5d4ce9a380b9ac933260c67b6c4b2f5498604f42952a4780f55af6e816
+
+$ docker run -d --name grade-redis --net=grade-network redis:7-alpine
+5216c548653ea858ab7ee2671c7d21bfa85c49f59e6590fcae065fe0228dae89
+
+$ docker run -d --name grade-flask --net=grade-network -p 5001:5001 grade-tracker:1.0
+22ccbcc9d5485baa748420ab04e9f8c9c67099ad134b6ff9264ccd6194fbc3b5
+
+$ docker ps
+NAMES          IMAGE              STATUS          PORTS
+grade-flask    grade-tracker:1.0  Up 8 seconds    0.0.0.0:5001->5001/tcp
+grade-redis    redis:7-alpine     Up 8 seconds    6379/tcp
+grade-mysql    mysql:8.0          Up 8 seconds    3306/tcp, 33060/tcp
+
+$ curl http://localhost:5001/grades
+[{"grade":"A","student":"Alice","subject":"DevOps"},{"grade":"B+","student":"Bob","subject":"DevOps"},{"grade":"A-","student":"Carol","subject":"DevOps"}]
+
+$ docker network inspect grade-network
+Container: grade-flask | IP: 172.20.0.4/16
+Container: grade-mysql | IP: 172.20.0.2/16
+Container: grade-redis | IP: 172.20.0.3/16
