@@ -1,0 +1,25 @@
+$ docker build -t secure-flask:1.0 .
+[+] Building 9.2s (10/10) FINISHED
+
+$ python3 test_security.py
+Building secure-flask:1.0 image...
+Image built: sha256:77ac29b2e690
+Starting container with security options...
+Container started: 1072cebb7743
+SecurityOpt: ['no-new-privileges:true']
+CapDrop: ['ALL']
+
+Testing restricted actions:
+  cat /etc/shadow -> exit 1 (expected: 1, permission denied)
+  whoami -> appuser (should be appuser, not root)
+  id -> uid=1001(appuser) gid=1001(appuser) groups=1001(appuser)
+Done. Container stopped.
+
+$ docker inspect secure-flask-app --format 'SecurityOpt={{.HostConfig.SecurityOpt}} CapDrop={{.HostConfig.CapDrop}}'
+SecurityOpt=[no-new-privileges:true] CapDrop=[ALL]
+
+$ docker exec secure-flask-app whoami
+appuser
+
+$ docker exec secure-flask-app cat /etc/shadow
+cat: /etc/shadow: Permission denied
