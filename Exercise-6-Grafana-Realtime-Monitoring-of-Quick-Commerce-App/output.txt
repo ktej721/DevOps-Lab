@@ -1,0 +1,21 @@
+$ python3 delivery_metrics.py &
+Starting ZAPPTTO metrics server on :8000 ...
+Metrics available at http://localhost:8000/metrics
+[19:24:53] riders=75 pending=24 transit=32 done+=10 rating=4.83
+[19:24:55] riders=42 pending=18 transit=45 done+=7 rating=4.91
+[19:24:57] riders=61 pending=28 transit=37 done+=5 rating=4.72
+
+$ curl http://localhost:8000/metrics | grep "^zapptto"
+zapptto_active_riders 75.0
+zapptto_pending_orders 24.0
+zapptto_in_transit_orders 32.0
+zapptto_completed_orders_total 10.0
+zapptto_cancelled_orders_total 3.0
+zapptto_delivery_seconds_count 2.0
+zapptto_avg_customer_rating 4.83
+
+$ docker run -d --name prometheus -p 9090:9090 \
+  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+  -v $(pwd)/alert_rules.yml:/etc/prometheus/alert_rules.yml \
+  prom/prometheus
+$ docker run -d --name grafana -p 3000:3000 grafana/grafana
