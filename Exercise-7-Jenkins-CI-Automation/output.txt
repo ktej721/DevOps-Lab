@@ -1,0 +1,19 @@
+$ docker run -d \
+  --name jenkins-devops \
+  -p 8080:8080 \
+  -p 50000:50000 \
+  -v jenkins_devops_home:/var/jenkins_home \
+  jenkins/jenkins:lts-jdk17
+Unable to find image 'jenkins/jenkins:lts-jdk17' locally
+lts-jdk17: Pulling from jenkins/jenkins
+Status: Downloaded newer image for jenkins/jenkins:lts-jdk17
+a3c4e45f3b5cd921be5f9b05abb43a61938c7cf
+
+$ docker ps | grep jenkins
+jenkins-devops   jenkins/jenkins:lts-jdk17   Up 35 seconds   0.0.0.0:8080->8080/tcp, 0.0.0.0:50000->50000/tcp
+
+$ docker exec jenkins-devops cat /var/jenkins_home/secrets/initialAdminPassword
+8a3f2c1d9b4e7f6a2d8c1b5e9f3a7d2c
+
+Jenkins is now accessible at: http://localhost:8080
+Complete the setup wizard to install suggested plugins and create admin user.
