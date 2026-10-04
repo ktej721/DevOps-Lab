@@ -1,0 +1,40 @@
+$ cat hello-devops.sh
+#!/bin/bash
+echo "==========================================="
+echo "  Hello from Jenkins! - DevOps Lab Ex8"
+echo "==========================================="
+echo "Build Date : $(date '+%Y-%m-%d %H:%M:%S')"
+echo "Hostname   : $(hostname)"
+echo "Workspace  : ${WORKSPACE:-$(pwd)}"
+echo "Build #    : ${BUILD_NUMBER:-manual}"
+echo "==========================================="
+echo "DevOps pipeline is working correctly!"
+
+$ bash hello-devops.sh
+===========================================
+  Hello from Jenkins! - DevOps Lab Ex8
+===========================================
+Build Date : 2025-10-13 09:22:41
+Hostname   : kirantej-macbook.local
+Workspace  : /Users/kirantej/hackathon/DevOps-Lab/Exercise-8
+Build #    : manual
+===========================================
+DevOps pipeline is working correctly!
+
+# Jenkins Console Output:
+Started by user Kiran Tej
+Running as SYSTEM
+[Pipeline] Start of Pipeline
+[Pipeline] stage
+[Pipeline] { (Hello World)
+[Pipeline] sh
++ chmod +x hello-devops.sh
++ ./hello-devops.sh
+===========================================
+  Hello from Jenkins! - DevOps Lab Ex8
+===========================================
+Build Date : 2025-10-13 09:22:41
+Hostname   : jenkins-devops
+...
+[Pipeline] End of Pipeline
+Finished: SUCCESS

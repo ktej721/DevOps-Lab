@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Checking out source code..."
+                checkout scm
+            }
+        }
+        stage('Hello World') {
+            steps {
+                echo "Running Hello World script..."
+                sh 'chmod +x hello-devops.sh && ./hello-devops.sh'
+            }
+        }
+    }
+    post {
+        success {
+            echo "Build SUCCESS! Hello World job completed."
+        }
+        failure {
+            echo "Build FAILED. Check console output."
+        }
+    }
+}
