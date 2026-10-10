@@ -1,0 +1,11 @@
+$ python3 -m pytest test_app.py -v
+============================= test session starts ==============================
+platform darwin -- Python 3.11.8, pytest-9.0.2, pluggy-1.6.0
+rootdir: /Users/kirantej/hackathon/DevOps-Lab/Exercise-9
+collected 3 items
+
+test_app.py::test_home_returns_200 PASSED                                [ 33%]
+test_app.py::test_home_message PASSED                                    [ 66%]
+test_app.py::test_status_endpoint PASSED                                 [100%]
+
+============================== 3 passed in 0.74s ===============================
