@@ -1,0 +1,31 @@
+$ minikube start --nodes 3 -p devops-lab-multi --driver=docker --cni=bridge
+* Starting multi-node cluster 'devops-lab-multi'...
+* Node devops-lab-multi: starting control-plane...
+* Node devops-lab-multi-m02: joining cluster...
+* Node devops-lab-multi-m03: joining cluster...
+* Done!
+
+$ kubectl get nodes
+NAME                   STATUS   ROLES           AGE   VERSION
+devops-lab-multi       Ready    control-plane   2m    v1.37.0
+devops-lab-multi-m02   Ready    <none>          90s   v1.37.0
+devops-lab-multi-m03   Ready    <none>          60s   v1.37.0
+
+$ kubectl apply -f product-catalog-deploy.yaml
+deployment.apps/product-catalog created
+service/product-catalog-svc created
+
+$ kubectl apply -f shopping-cart-deploy.yaml
+deployment.apps/shopping-cart created
+service/shopping-cart-svc created
+
+$ kubectl get pods -o wide
+NAME                               READY  STATUS   IP           NODE
+product-catalog-7c8bc-x4k9p        1/1    Running  10.244.1.5   devops-lab-multi-m02
+product-catalog-7c8bc-m2n7t        1/1    Running  10.244.2.3   devops-lab-multi-m03
+shopping-cart-5d9bf-r8p2k          1/1    Running  10.244.1.6   devops-lab-multi-m02
+shopping-cart-5d9bf-t5x9n          1/1    Running  10.244.2.4   devops-lab-multi-m03
+shopping-cart-5d9bf-q3w7m          1/1    Running  10.244.1.7   devops-lab-multi-m02
+
+$ curl http://$(minikube -p devops-lab-multi ip):30300/products
+{"count":5,"products":[...],"served_by":"product-catalog-7c8bc-x4k9p","node":"devops-lab-multi-m02"}
